@@ -7,7 +7,11 @@
     "dev": "vite",
     "test": "echo No tests implemented so far",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --color",
+    "lint:fix": "eslint . --color --fix",
+    "format": "prettier --write '**/*.{json,md,scss,yaml,yml}'",
+    "format:check": "prettier --check '**/*.{json,md,scss,yaml,yml}'"
   },
   "dependencies": {
     "@patternfly/patternfly": "4.222.4",
@@ -20,7 +24,7 @@
     "@reduxjs/toolkit": "^1.5",
     "@sentry/browser": "^6.0",
     "axios": "^0.21.1",
-    "eslint": "8.30.0",
+    "eslint": "^8.30.0",
     "i18next": "21.10.0",
     "i18next-browser-languagedetector": "6.1.8",
     "i18next-parser": "^3.3.0",
@@ -43,7 +47,14 @@
   "devDependencies": {
     "@types/react": "^17.0",
     "@types/react-dom": "^17.0",
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": ">=5.0.0 <6.0.0",
     "@vitejs/plugin-react": "^3.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.8.1",
     "typescript": "^4.9.3",
     "vite": "^4.0.0"
   }
