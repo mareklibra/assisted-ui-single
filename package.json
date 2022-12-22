@@ -23,7 +23,7 @@
     "@patternfly/react-tokens": "4.94.3",
     "@reduxjs/toolkit": "^1.5",
     "@sentry/browser": "^6.0",
-    "axios": "^0.21.1",
+    "axios": ">=0.22.0 <1.0.0",
     "eslint": "^8.30.0",
     "i18next": "21.10.0",
     "i18next-browser-languagedetector": "6.1.8",
