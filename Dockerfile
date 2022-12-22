@@ -7,6 +7,7 @@ RUN pnpm --version
 
 COPY . /opt/app-root/src
 
+RUN pnpm install
 RUN pnpm test
 RUN pnpm build
 
