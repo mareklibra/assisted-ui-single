@@ -1,28 +1,33 @@
 import * as React from 'react';
-import reactLogo from './assets/react.svg';
+import { OCM } from 'openshift-assisted-ui-lib';
+
+// import reactLogo from './assets/react.svg';
+
 import './App.css';
 
+const { Services } = OCM;
+
 function App() {
-  const [count, setCount] = React.useState(0);
+  const [clusters, setClusters] = React.useState<OCM.Cluster[]>();
+  React.useEffect(() => {
+    const doItAsync = async () => {
+      try {
+        const clusters = (await Services.APIs.ClustersAPI.list()).data;
+        console.log('Clusters list retrieved: ', clusters);
+        setClusters(clusters);
+      } catch (e) {
+        console.error('Failed to get list of clusters: ', e);
+      }
+    };
+    doItAsync();
+  }, []);
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+    <div>
+      This is the Assisted Installer Web User Interface.
+      <br />
+      Clusters:
+      {clusters ? JSON.stringify(clusters) : 'Loading...'}
     </div>
   );
 }

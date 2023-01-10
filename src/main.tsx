@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 
-/*
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
-*/
+const axiosConfig = () => {
+  // Hack for assisted-ui-lib axiosClient.ts, we switched from react-create-app to vite
+  // @ts-ignore
+  window.process = {
+    env: {
+      REACT_APP_API_ROOT: import.meta.env.VITE_ASSISTED_SERVICE_API_ROOT || '/api/assisted-install',
+    },
+  };
+};
 
+axiosConfig();
 ReactDOM.render(<App />, document.getElementById('root'));

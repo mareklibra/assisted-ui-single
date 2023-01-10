@@ -13,10 +13,16 @@ RUN pnpm build
 
 # Final image
 FROM registry.access.redhat.com/ubi8/nginx-120:1-74
+
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log
+
 COPY --from=builder /opt/app-root/src/dist/ .
-COPY --from=builder /opt/app-root/src/default.conf "${NGINX_CONFIGURATION_PATH}"
+COPY ./deploy /deploy
+# COPY --from=builder /opt/app-root/src/default.conf "${NGINX_CONFIGURATION_PATH}"
 USER ${USER_UID}
-EXPOSE 9443
+EXPOSE 8080
 
-CMD ["nginx", "-g", "daemon off;"]
-
+# CMD ["nginx", "-g", "daemon off;"]
+CMD [ "/deploy/start.sh" ]
