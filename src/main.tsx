@@ -5,6 +5,7 @@ import './index.css';
 
 const axiosConfig = () => {
   // Hack for assisted-ui-lib axiosClient.ts, we switched from react-create-app to vite
+  // TODO: make it gerenric there by depending on passed parameters from the calling context
   // @ts-ignore
   window.process = {
     env: {
