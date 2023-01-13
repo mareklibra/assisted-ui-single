@@ -13,7 +13,7 @@ const dateTimeFormatter = new Intl.DateTimeFormat('default', {
   year: 'numeric',
 });
 
-i18n.use(initReactI18next).init({
+void i18n.use(initReactI18next).init({
   lng: 'en',
   resources: {
     en: {
@@ -41,12 +41,12 @@ i18n.use(initReactI18next).init({
     format(value, format, lng) {
       if (format === 'number') {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat#Browser_compatibility
-        return new Intl.NumberFormat(lng).format(value);
+        return new Intl.NumberFormat(lng).format(value as number);
       }
       if (value instanceof Date) {
         return dateTimeFormatter.format(value);
       }
-      return value;
+      return value as string;
     },
     escapeValue: false, // not needed for react as it escapes by default
   },
@@ -55,7 +55,9 @@ i18n.use(initReactI18next).init({
     transSupportBasicHtmlNodes: true, // allow <br/> and simple html elements in translations
   },
   missingKeyHandler(lng, ns, key) {
-    console.error(`Missing i18n key '${key}' in namespace '${ns}' and language '${lng}.'`);
+    console.error(
+      `Missing i18n key '${key}' in namespace '${ns}' and language '${lng.toString()}.'`,
+    );
   },
 });
 

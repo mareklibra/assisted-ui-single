@@ -10,18 +10,21 @@ export const SingleCluster = () => {
   const [error, setError] = React.useState<string>();
   const [clusters, setClusters] = React.useState<OCM.Cluster[]>();
 
-  const fetchClusters = React.useCallback(async () => {
-    try {
-      const { data } = await Services.APIs.ClustersAPI.list();
-      setClusters(data);
-      setError(undefined);
-    } catch (e) {
-      Api.handleApiError(e, () => setError('Failed to fetch cluster.'));
-    }
+  const fetchClusters = React.useCallback(() => {
+    const doItAsync = async () => {
+      try {
+        const { data } = await Services.APIs.ClustersAPI.list();
+        setClusters(data);
+        setError(undefined);
+      } catch (e) {
+        Api.handleApiError(e, () => setError('Failed to fetch cluster.'));
+      }
+    };
+    void doItAsync();
   }, [setClusters]);
 
   React.useEffect(() => {
-    void fetchClusters();
+    fetchClusters();
   }, [fetchClusters]);
 
   if (error) {
