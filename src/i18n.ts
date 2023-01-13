@@ -1,6 +1,9 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import enTranslation from '../node_modules/openshift-assisted-ui-lib/dist/locales/en/translation.json';
+import jaTranslation from '../node_modules/openshift-assisted-ui-lib/dist/locales/ja/translation.json';
+import koTranslation from '../node_modules/openshift-assisted-ui-lib/dist/locales/ko/translation.json';
+import zhTranslation from '../node_modules/openshift-assisted-ui-lib/dist/locales/zh/translation.json';
 
 const dateTimeFormatter = new Intl.DateTimeFormat('default', {
   month: 'short',
@@ -16,8 +19,17 @@ i18n.use(initReactI18next).init({
     en: {
       translation: enTranslation,
     },
+    ja: {
+      translation: jaTranslation,
+    },
+    ko: {
+      translation: koTranslation,
+    },
+    zh: {
+      translation: zhTranslation,
+    },
   },
-  supportedLngs: ['en'],
+  supportedLngs: ['en', 'ja', 'ko', 'zh'],
   fallbackLng: 'en',
   load: 'languageOnly',
   detection: { caches: [] },
@@ -43,7 +55,6 @@ i18n.use(initReactI18next).init({
     transSupportBasicHtmlNodes: true, // allow <br/> and simple html elements in translations
   },
   missingKeyHandler(lng, ns, key) {
-    // eslint-disable-next-line no-console
     console.error(`Missing i18n key '${key}' in namespace '${ns}' and language '${lng}.'`);
   },
 });
