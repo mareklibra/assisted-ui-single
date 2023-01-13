@@ -1,15 +1,18 @@
 import React from 'react';
-import { NewClusterPage as NewClusterPageLib } from 'openshift-assisted-ui-lib/ocm';
+import { NewSingleClusterPage } from 'openshift-assisted-ui-lib/ocm';
 import { AppPage } from './AppPage';
 
 // TODO(mlibra): Remove OCP version dropdown
 // TODO(mlibra): Clarify DHCP vs. Static IPs configuration
-// TODO(mlibra): load locales
+// hide operators
+// remove Ad host
+// remove SNO
+// final restart-modal
 
 export const NewClusterPage: React.FC = () => {
   return (
     <AppPage>
-      <NewClusterPageLib />
+      <NewSingleClusterPage />
     </AppPage>
   );
 };

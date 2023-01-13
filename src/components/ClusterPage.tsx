@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClusterPage as ClusterPageLib } from 'openshift-assisted-ui-lib/ocm';
+import { SingleClusterPage } from 'openshift-assisted-ui-lib/ocm';
 import { RouteComponentProps } from 'react-router-dom';
 import { AppPage } from './AppPage';
 
@@ -10,7 +10,7 @@ type MatchParams = {
 export const ClusterPage: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   return (
     <AppPage>
-      <ClusterPageLib clusterId={match.params?.clusterId} />
+      <SingleClusterPage clusterId={match.params?.clusterId} />
     </AppPage>
   );
 };
