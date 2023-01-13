@@ -1,22 +1,19 @@
-import * as React from 'react';
+import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { OCM } from 'openshift-assisted-ui-lib';
+import { AssistedUILibVersion, Features, Store } from 'openshift-assisted-ui-lib/ocm';
 
 import { ROUTE_BASE_PATH, SINGLE_CLUSTER_ENABLED_FEATURES } from './config';
-import SingleCluster from './components/SingleCluster';
+import { SingleCluster } from './components/SingleCluster';
+import { NewClusterPage } from './components/NewClusterPage';
+import { ClusterPage } from './components/ClusterPage';
+
+const { FeatureGateContextProvider } = Features;
+const { store } = Store;
 
 // import reactLogo from './assets/react.svg';
 
 import './App.css';
-
-const {
-  AssistedUILibVersion,
-  ClusterPage,
-  NewClusterPage,
-  Features: { FeatureGateContextProvider },
-  Store: { store },
-} = OCM;
 
 function App() {
   return (

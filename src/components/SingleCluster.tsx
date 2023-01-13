@@ -6,7 +6,7 @@ import { ROUTE_BASE_PATH } from '../config';
 
 const { ErrorState, LoadingState, Services, Api } = OCM;
 
-const SingleCluster = () => {
+export const SingleCluster = () => {
   const [error, setError] = React.useState<string>();
   const [clusters, setClusters] = React.useState<OCM.Cluster[]>();
 
@@ -51,5 +51,3 @@ const SingleCluster = () => {
 
   return <Redirect to={`${ROUTE_BASE_PATH}/clusters/${clusters[0].id}`} />;
 };
-
-export default SingleCluster;
