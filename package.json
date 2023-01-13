@@ -11,7 +11,8 @@
     "lint": "eslint . --color",
     "lint:fix": "eslint . --color --fix",
     "format": "prettier --write '**/*.{json,md,scss,yaml,yml}'",
-    "format:check": "prettier --check '**/*.{json,md,scss,yaml,yml}'"
+    "format:check": "prettier --check '**/*.{json,md,scss,yaml,yml}'",
+    "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
     "@patternfly/patternfly": "4.222.4",
