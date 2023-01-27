@@ -1,10 +1,10 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import enTranslation from 'openshift-assisted-ui-lib/dist/locales/en/translation.json';
-import jaTranslation from 'openshift-assisted-ui-lib/dist/locales/ja/translation.json';
-import koTranslation from 'openshift-assisted-ui-lib/dist/locales/ko/translation.json';
-import zhTranslation from 'openshift-assisted-ui-lib/dist/locales/zh/translation.json';
+import enTranslation from 'openshift-assisted-ui-lib/locales/en/translation.json';
+import jaTranslation from 'openshift-assisted-ui-lib/locales/ja/translation.json';
+import koTranslation from 'openshift-assisted-ui-lib/locales/ko/translation.json';
+import zhTranslation from 'openshift-assisted-ui-lib/locales/zh/translation.json';
 
 const dateTimeFormatter = new Intl.DateTimeFormat('default', {
   month: 'short',
