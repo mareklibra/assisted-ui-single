@@ -29,7 +29,7 @@ specifiers:
   i18next-browser-languagedetector: 6.1.8
   i18next-parser: ^3.3.0
   lodash: ^4.17.15
-  openshift-assisted-ui-lib: 2.13.0
+  openshift-assisted-ui-lib: 2.14.2
   prettier: ^2.8.1
   react: ^17.0
   react-dom: ^17.0
@@ -64,7 +64,7 @@ dependencies:
   i18next-browser-languagedetector: 6.1.8
   i18next-parser: 3.11.0
   lodash: 4.17.21
-  openshift-assisted-ui-lib: 2.13.0_jb6ysqt2gfmsasprdv35ld6pvi
+  openshift-assisted-ui-lib: 2.14.2_jb6ysqt2gfmsasprdv35ld6pvi
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-i18next: 11.18.6_e7ln4szqz2ion6onialhqhk2fa
@@ -1084,10 +1084,10 @@ packages:
       core-js: 2.6.12
     dev: false
 
-  /axios-case-converter/0.8.1_axios@0.27.2:
-    resolution: {integrity: sha512-xbv9rFmPN02rkwXmbze5Hr9eVUeC4OXSrNd19UrGu4rT5+xh+A+SC/1syUtI+aax2E+3WO+uoWbmo1okzbupuQ==}
+  /axios-case-converter/0.11.1_axios@0.27.2:
+    resolution: {integrity: sha512-i5hrkBg7SE9jsm2Q+ClznR5DsKcYXChH6Cc3Rhx2p4gdIfJwvvO5/ATcAg/vN2UVzGE2B1eR1O4VuEGkICdJdQ==}
     peerDependencies:
-      axios: ^0.21.1
+      axios: '>=0.23.0 <2.0.0'
     dependencies:
       axios: 0.27.2
       camel-case: 4.1.2
@@ -2847,8 +2847,8 @@ packages:
     dependencies:
       wrappy: 1.0.2
 
-  /openshift-assisted-ui-lib/2.13.0_jb6ysqt2gfmsasprdv35ld6pvi:
-    resolution: {integrity: sha512-dCgLK1PBT9/NpZZqj1s6aAaJd0VKm4wZZfqPC4AOMYYSkD3Z9tUGOmF4dNKxYQqLzlCt2euQgbOXD7SCqx+4sQ==}
+  /openshift-assisted-ui-lib/2.14.2_jb6ysqt2gfmsasprdv35ld6pvi:
+    resolution: {integrity: sha512-KZtOm9rFT8he7gCiNFlnSv8rGMh8CzDJ2/it3EempZCek0X6FcYTfb5I9eAsExQKsxKE4b4bnnGP3yjhS95A6w==}
     engines: {node: '>=12.16'}
     peerDependencies:
       '@patternfly/react-code-editor': ^4.47.2
@@ -2859,7 +2859,7 @@ packages:
       '@patternfly/react-tokens': ^4.58.2
       '@reduxjs/toolkit': ^1.5
       '@sentry/browser': ^5.9 || ^6.0
-      axios: '>=0.19.2 <1.0.0'
+      axios: '>=0.23.0 <1.0.0'
       i18next: ^20.4.0 || ^21.0
       i18next-browser-languagedetector: ^6.1.2
       i18next-parser: ^3.3.0
@@ -2887,7 +2887,7 @@ packages:
       '@reduxjs/toolkit': 1.9.1_csuupx2mfbspdz76fkecdgkise
       '@sentry/browser': 6.19.7
       axios: 0.27.2
-      axios-case-converter: 0.8.1_axios@0.27.2
+      axios-case-converter: 0.11.1_axios@0.27.2
       cidr-tools: 4.3.0
       classnames: 2.3.2
       eslint-plugin-import: 2.26.0_tqyj5ytb5g6r5ett7xxedhk6eq
