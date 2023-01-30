@@ -4,7 +4,6 @@ import { AppPage } from './AppPage';
 
 // TODO(mlibra): Remove OCP version dropdown
 // clarify "Hosts not showing up?"
-// remove SNO
 // final restart-modal
 
 export const NewClusterPage: React.FC = () => {

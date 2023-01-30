@@ -1,0 +1,21 @@
+# Cypress test image
+#ARG CHROME_VERSION='107.0.5304.121-1'
+ARG CHROME_VERSION='109.0.5414.119-1'
+#ARG EDGE_VERSION='100.0.1185.29-1'
+#ARG FIREFOX_VERSION='107.0'
+
+# We do not use pre-packed images (i.e. cypress/included) to reduce the resulting image size
+FROM docker.io/cypress/factory:1.0.2
+RUN corepack enable
+RUN corepack prepare pnpm@latest --activate
+RUN pnpm --version
+
+COPY ./cypress /e2e/cypress
+COPY ./cypress.config.ts ./LICENSE ./package.json ./pnpm-lock.yaml ./tsconfig.json ./tsconfig.node.json ./vite.config.ts /e2e/
+
+WORKDIR /e2e
+RUN pnpm install
+
+ENTRYPOINT ["pnpm", "cypress:run", "--browser", "chrome"]
+
+
