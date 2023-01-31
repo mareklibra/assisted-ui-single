@@ -13,7 +13,7 @@
     "format": "prettier --write '**/*.{json,md,scss,yaml,yml}'",
     "format:check": "prettier --check '**/*.{json,md,scss,yaml,yml}'",
     "clean": "rm -rf node_modules dist",
-    "cypress:open": "cypress open",
+    "cypress:open": "cypress open --config watchForFileChanges=false",
     "cypress:run": "cypress run"
   },
   "dependencies": {
