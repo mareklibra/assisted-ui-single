@@ -15,12 +15,12 @@ For the UI itself, only a running [assisted-service](https://github.com/openshif
 
 In reality, the project is expected to provide the UI for single-cluster on-prem installation which includes:
 
-- user downloads generic installation ISO (TBD: more details)
+- user downloads generic installation ISO, among the others includes container image with this Web UI (TBD: more details about the ISO)
 - user boots all nodes with it
 - when prompted in the console, chooses exactly one machine to be the **node0** and provides basic network configuration on all nodes
-- subsequently, the node0 executes the assisted-service and the Web UI (this application) in containers on the bare-metal
-- the user navigates to this Web UI in a browser
-- by passing through a wizard, the users enters details about the desired cluster while examining the rest of the hosts automatically discovered
+- **subsequently, the node0 executes the assisted-service and the Web UI (this application) in containers on the bare-metal**
+- **the user navigates to this Web UI in a browser**
+- **by passing through a wizard, the users enters details about the desired cluster while examining the rest of the hosts automatically discovered**
 - once the configuration is done, the node0 is rebooted to join the newly created OCP cluster
 
 
@@ -42,7 +42,7 @@ Do not skip
 - https://github.com/openshift-metal3/dev-scripts#preparation
 - https://github.com/openshift-metal3/dev-scripts/blob/master/agent/README.md
 
-but following was successfully used so far in the "config_[user].sh":
+as a hint, following was successfully used so far in the "config_[user].sh":
 
 ```
 export CI_TOKEN="__FILL_IN__"
