@@ -4,6 +4,7 @@
   See comments bellow.
 */
 
+import { CLUSTER_DOMAIN, CLUSTER_NAME } from '../support/constants';
 import { getPullSecret } from '../support/utils';
 
 describe('Homepage', () => {
@@ -20,7 +21,7 @@ describe('Homepage', () => {
     }
   });
 
-  xit('can be loaded', () => {
+  it('can be loaded', () => {
     cy.visit('/');
 
     cy.get('h2').contains('Cluster details');
@@ -28,7 +29,7 @@ describe('Homepage', () => {
     cy.get('button[name="next"]').contains('Next').should('be.disabled');
   });
 
-  xit('contains expected components', () => {
+  it('contains expected components', () => {
     cy.visit('/');
     cy.get('h2').contains('Cluster details');
 
@@ -84,7 +85,7 @@ describe('Homepage', () => {
   // Important:
   // Following test case modifies assisted-service database, recently clean-up is not implemented.
   // The tests in 02.*.cy.ts and later require this step to pass before their execution.
-  it('can move Next', () => {
+  it('creates a cluster (ireversible)', () => {
     // Prerequisities
     expect(pullSecret).not.to.be.empty;
     cy.visit('/');
@@ -97,8 +98,8 @@ describe('Homepage', () => {
     cy.get('button[name="cancel"]').contains('Cancel').should('not.be.disabled');
     cy.get('.pf-c-page__main').scrollTo('top');
 
-    cy.get('input[id=form-input-name-field]').type('test-cluster');
-    cy.get('input[id=form-input-baseDnsDomain-field]').type('my-domain.com');
+    cy.get('input[id=form-input-name-field]').type(CLUSTER_NAME);
+    cy.get('input[id=form-input-baseDnsDomain-field]').type(CLUSTER_DOMAIN);
 
     cy.get('textarea[id=form-input-pullSecret-field').type(pullSecret, {
       parseSpecialCharSequences: false,
