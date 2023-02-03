@@ -181,9 +181,12 @@ Please refer to the Dockerfile.e2e.tests for the browser version being used and 
 
 ```
 # Provide params
-export CYPRESS_RECORDINGS=./cypress.recordings # whatever directory, can be /tmp
-export CYPRESS_BASE_URL=http://localhost:5173 # The URL of the application
-export CYPRESS_PULL_SECRET_B64="`base64 -w0 ../YOUR_PULL_SECRET.FILE.json`"
+export CYPRESS_BASE_URL=http://localhost:5173 # required, the URL of the application
+export CYPRESS_PULL_SECRET_B64="`base64 -w0 ../YOUR_PULL_SECRET.FILE.json`" # required
+export CYPRESS_RECORDINGS=./cypress.recordings # optional, whatever directory, can be /tmp
+
+export CYPRESS_API_VIP=192.168.111.50 # Will be used allong OVN, default: 192.168.111.10
+export CYPRESS_INRESS_VIP=192.168.111.51 # Will be used allong OVN, default: 192.168.111.11
 # export CYPRESS_SKIP_CREATE_CLUSTER=yes # By default, the test is not skipped and empty assisted-service DB is expected. Use this option to re-run test once the former one passed and so the assisted-service is with one Cluster already.
 
 # Prepare storage for recordings
@@ -195,6 +198,8 @@ podman run -it -w /e2e --network=host \
   -e CYPRESS_BASE_URL \
   -e CYPRESS_PULL_SECRET_B64 \
   -e CYPRESS_SKIP_CREATE_CLUSTER \
+  -e CYPRESS_API_VIP \
+  -e CYPRESS_INGRESS_VIP \
   -v ${CYPRESS_RECORDINGS}/video:/e2e/cypress/videos:Z \
   -v ${CYPRESS_RECORDINGS}/screenshots:/e2e/cypress/screenshots:Z \
   quay.io/mlibra/assisted-ui-single-tests:latest \
