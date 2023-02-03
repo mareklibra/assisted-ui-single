@@ -5,7 +5,7 @@
 */
 
 import { CLUSTER_DOMAIN, CLUSTER_NAME } from '../support/constants';
-import { getPullSecret } from '../support/utils';
+import { getPullSecret, isSkipCreateCluster } from '../support/utils';
 
 describe('Homepage', () => {
   let pullSecret: string;
@@ -24,13 +24,42 @@ describe('Homepage', () => {
   it('can be loaded', () => {
     cy.visit('/');
 
-    cy.get('h2').contains('Cluster details');
-    cy.get('.pf-c-page__main').scrollTo('bottom');
-    cy.get('button[name="next"]').contains('Next').should('be.disabled');
+    if (isSkipCreateCluster()) {
+      cy.log(
+        'The CYPRESS_SKIP_CREATE_CLUSTER env variable is set to "yes", we expect an assisted-service cluster to be already created.',
+      );
+      cy.url().should('not.contain', '/new');
+      cy.get('h2').contains('Host discovery');
+      cy.get('button[name="back"]').contains('Back').should('not.be.disabled').click();
+      cy.get('h2').contains('Cluster details');
+      cy.get('.pf-c-page__main').scrollTo('bottom');
+      cy.get('button[name="next"]').contains('Next').should('not.be.disabled');
+    } else {
+      cy.log(
+        'The CYPRESS_SKIP_CREATE_CLUSTER env variable is not set, we expect the list of clusters in assisted-service to be empty.',
+      );
+      cy.url().should('contain', '/new');
+      cy.get('h2').contains('Cluster details');
+      cy.get('.pf-c-page__main').scrollTo('bottom');
+      cy.get('button[name="next"]').contains('Next').should('be.disabled');
+    }
   });
 
   it('contains expected components', () => {
     cy.visit('/');
+
+    if (isSkipCreateCluster()) {
+      cy.log(
+        "The CYPRESS_SKIP_CREATE_CLUSTER env variable is set to 'yes', we expect an assisted-service cluster to be already created and so the furst page in the flow is Host discovery, let's go Back first.",
+      );
+      cy.url().should('not.contain', '/new');
+      cy.get('h2').contains('Host discovery');
+      cy.get('button[name="back"]').contains('Back').should('not.be.disabled').click();
+      cy.get('h2').contains('Cluster details');
+      cy.get('.pf-c-page__main').scrollTo('bottom');
+      cy.get('button[name="next"]').contains('Next').should('not.be.disabled');
+    }
+
     cy.get('h2').contains('Cluster details');
 
     // left-side navigation
@@ -51,22 +80,35 @@ describe('Homepage', () => {
     cy.get('div[id=form-input-baseDnsDomain-field-helper]').contains(
       'All DNS records must be subdomains',
     );
-    cy.get('div[id=form-input-baseDnsDomain-field-helper] > strong').contains(
-      '[Cluster Name].[example.com]',
-    );
-
-    cy.get('label[for=form-input-openshiftVersion-field]').contains('OpenShift version');
-    cy.get('div[id=form-input-openshiftVersion-field] > button');
-    cy.get(
-      'div[id=form-input-openshiftVersion-field] > button > .pf-c-dropdown__toggle-text',
-    ).contains('OpenShift'); // testing for part of the OCP image name. One must be present.
+    if (isSkipCreateCluster()) {
+      cy.get('#form-input-baseDnsDomain-field-helper > strong').contains(
+        `${CLUSTER_NAME}.${CLUSTER_DOMAIN}`,
+      );
+    } else {
+      cy.get('div[id=form-input-baseDnsDomain-field-helper] > strong').contains(
+        '[Cluster Name].[example.com]',
+      );
+    }
+    if (isSkipCreateCluster()) {
+      cy.log('Test for OCP version dropdown field skipped');
+    } else {
+      cy.get('label[for=form-input-openshiftVersion-field]').contains('OpenShift version');
+      cy.get('div[id=form-input-openshiftVersion-field] > button');
+      cy.get(
+        'div[id=form-input-openshiftVersion-field] > button > .pf-c-dropdown__toggle-text',
+      ).contains('OpenShift'); // testing for part of the OCP image name. One must be present.
+    }
 
     // scroll to move visible area
     cy.get('.pf-c-page__main').scrollTo('bottom');
 
-    cy.get('label[for=form-input-pullSecret-field]').contains('Pull secret');
-    cy.get('label[for=form-input-pullSecret-field] > .pf-c-form__label-required');
-    cy.get('textarea[id=form-input-pullSecret-field');
+    if (isSkipCreateCluster()) {
+      cy.log('Test for pull-secret field skipped');
+    } else {
+      cy.get('label[for=form-input-pullSecret-field]').contains('Pull secret');
+      cy.get('label[for=form-input-pullSecret-field] > .pf-c-form__label-required');
+      cy.get('textarea[id=form-input-pullSecret-field');
+    }
 
     cy.get('label[for=form-input-enableDiskEncryptionOnMasters-field]').contains(
       'Control plane nodes',
@@ -78,7 +120,11 @@ describe('Homepage', () => {
     cy.get('div[id=alert-tpmv2-bios]').should('not.exist');
 
     // Bottom
-    cy.get('button[name="next"]').contains('Next').should('be.disabled');
+    if (isSkipCreateCluster()) {
+      cy.get('button[name="next"]').contains('Next').should('not.be.disabled');
+    } else {
+      cy.get('button[name="next"]').contains('Next').should('be.disabled');
+    }
     cy.get('button[name="cancel"]').contains('Cancel').should('not.be.disabled');
   });
 
@@ -86,6 +132,11 @@ describe('Homepage', () => {
   // Following test case modifies assisted-service database, recently clean-up is not implemented.
   // The tests in 02.*.cy.ts and later require this step to pass before their execution.
   it('creates a cluster (ireversible)', () => {
+    if (isSkipCreateCluster()) {
+      cy.log('Skipping the test');
+      return;
+    }
+
     // Prerequisities
     expect(pullSecret).not.to.be.empty;
     cy.visit('/');
@@ -119,7 +170,7 @@ describe('Homepage', () => {
     cy.get('button[name="cancel"]').contains('Cancel').should('not.be.disabled');
 
     cy.get('button[name="next"]').click();
-    // Subsequently, a cluster is created in the assisted-service endpoint
+    cy.log('Creating a cluster in the Assisted Service');
     cy.get('.pf-c-wizard__nav-link.pf-m-current').contains('Host discovery');
     cy.get('h2').contains('Host discovery');
   });

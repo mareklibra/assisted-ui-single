@@ -93,6 +93,9 @@ describe('Host Discovery Page', () => {
     // TODO: implement validation of the Troubleshooting modal, it's content should be different for the single-cluster flow
     cy.get('#modal-host-troubleshooting__button-close').click();
 
+    // TODO: Extend following to variable amount of hosts. 
+    // Should it be fully dynamic (so the test will decide what is there)? Reusing #hosts-count element?
+    // Or do we reuse env variables like NUM_MASTERS from dev-scripts or similar?
     cy.log('Host Inventory section - as a prerequisite, the hosts should be discovered already');
     cy.get('h3').contains('Host Inventory');
     cy.get('tr[data-testid=host-row-0] > td[data-testid=host-name]').contains('master-0');
@@ -106,7 +109,7 @@ describe('Host Discovery Page', () => {
     cy.get('tr[data-testid=host-row-4] > td[data-testid=host-name]').contains('master-2');
     cy.get('tr[data-testid=host-row-4] > td[data-testid=host-hw-status]').contains('Ready');
 
-    cy.log('Going Next');
+    cy.log('Going Next to Storage');
     cy.get('button[name="next"]').contains('Next').click();
     cy.get('.pf-c-wizard__nav-link.pf-m-current').contains('Storage');
     cy.get('h2').contains('Storage');

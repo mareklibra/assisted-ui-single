@@ -11,3 +11,5 @@ export const getPullSecret = () => {
   console.log('Reading pull secret file: ', pullSecretFile);
   return cy.readFile(pullSecretFile, 'utf8');
 };
+
+export const isSkipCreateCluster = () => Cypress.env('SKIP_CREATE_CLUSTER') === 'yes';
