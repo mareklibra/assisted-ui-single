@@ -2,11 +2,15 @@
 
 import { CLUSTER_DOMAIN, CLUSTER_NAME, STANDARD_WAITING_TIME } from '../support/constants';
 
-/*
-  Prior runing these tests, make sure the 'creates cluster' test case from 01.homepage.cy.ts passed and created the cluster we will build upon.
-*/
-
 describe('Host Discovery Page', () => {
+  before(() => {
+    // Important
+    cy.log('Prior runing these tests, make sure:');
+    cy.log(
+      "  - the 'creates cluster' test case from 01.homepage.cy.ts passed and so we have a cluster to build upon.",
+    );
+  });
+
   it('renders Host Discovery step and can basically navigate', () => {
     cy.visit('/');
     cy.get('.pf-c-wizard__nav-link.pf-m-current').contains('Host discovery');
@@ -93,7 +97,7 @@ describe('Host Discovery Page', () => {
     // TODO: implement validation of the Troubleshooting modal, it's content should be different for the single-cluster flow
     cy.get('#modal-host-troubleshooting__button-close').click();
 
-    // TODO: Extend following to variable amount of hosts. 
+    // TODO: Extend following to variable amount of hosts.
     // Should it be fully dynamic (so the test will decide what is there)? Reusing #hosts-count element?
     // Or do we reuse env variables like NUM_MASTERS from dev-scripts or similar?
     cy.log('Host Inventory section - as a prerequisite, the hosts should be discovered already');

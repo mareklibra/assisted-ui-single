@@ -3,12 +3,16 @@
 import { VIP_ALLOCATION_TIMEOUT } from '../support/constants';
 import { getApiVip, getIngressVip } from '../support/utils';
 
-/*
-  Prior runing these tests, make sure the 'creates cluster' test case from 01.homepage.cy.ts passed and created the cluster we will build upon.
-*/
-
 describe('Networking Page', () => {
-  xit('renders Networking step and can basically navigate', () => {
+  before(() => {
+    // Important
+    cy.log('Prior runing these tests, make sure:');
+    cy.log(
+      "  - the 'creates cluster' test case from 01.homepage.cy.ts passed and so we have a cluster to build upon.",
+    );
+  });
+
+  it('renders Networking step and can basically navigate', () => {
     cy.visit('/');
     // There is automatic transition to the Review step once all validations are passing
     cy.get('#wizard-nv-host-discovery').click();
@@ -53,7 +57,7 @@ describe('Networking Page', () => {
     cy.get('h2').contains('Networking');
   });
 
-  it('contains expected components', () => {
+  it('can collect networking setting', () => {
     cy.visit('/');
     cy.get('#wizard-nv-host-discovery').click();
     cy.get('.pf-c-wizard__nav-link.pf-m-current').contains('Host discovery');

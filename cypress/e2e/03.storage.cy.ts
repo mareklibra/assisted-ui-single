@@ -2,11 +2,15 @@
 
 import { STANDARD_WAITING_TIME } from '../support/constants';
 
-/*
-  Prior runing these tests, make sure the 'creates cluster' test case from 01.homepage.cy.ts passed and created the cluster we will build upon.
-*/
-
 describe('Storage Page', () => {
+  before(() => {
+    // Important
+    cy.log('Prior runing these tests, make sure:');
+    cy.log(
+      "  - the 'creates cluster' test case from 01.homepage.cy.ts passed and so we have a cluster to build upon.",
+    );
+  });
+
   it('renders Storage step and can basically navigate', () => {
     cy.visit('/');
     cy.get('.pf-c-wizard__nav-link.pf-m-current').contains('Host discovery');
