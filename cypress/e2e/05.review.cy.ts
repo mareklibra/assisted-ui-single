@@ -54,9 +54,5 @@ describe('Networking Page', () => {
     cy.log('Trigerring the installation');
     cy.get('button[data-testid=button-install-cluster]').click();
     cy.get('h2').contains('Installation progress');
-
-    // cluster-progress-status-value     Preparing for installation
-// #cluster-detail-button-cancel-installation 
-// td[data-testid=host-status] contains Preparing for installation
   });
 });
