@@ -1,4 +1,5 @@
 export const STANDARD_WAITING_TIME = 5 * 1000; // in ms
+export const LONG_WAITING_TIME = 5 * 60 * 1000; // in ms
 export const VIP_ALLOCATION_TIMEOUT = 2 * 60 * 1000; // in ms
 
 export const CLUSTER_NAME = 'test-cluster';

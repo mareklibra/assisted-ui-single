@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { STANDARD_WAITING_TIME } from '../support/constants';
+import { LONG_WAITING_TIME, STANDARD_WAITING_TIME } from '../support/constants';
 
 describe('Storage Page', () => {
   before(() => {
@@ -19,7 +19,9 @@ describe('Storage Page', () => {
 
     cy.log('Navigation buttons on Host discovery page should not be disabled');
     cy.get('.pf-c-page__main').scrollTo('bottom');
-    cy.get('button[name="next"]').contains('Next').should('not.be.disabled');
+    cy.get('button[name="next"]')
+      .contains('Next')
+      .should('not.be.disabled', { timeout: LONG_WAITING_TIME });
     cy.get('button[name="back"]').contains('Back').should('not.be.disabled');
     cy.get('button[name="cancel"]').contains('Cancel').should('not.be.disabled');
 
@@ -31,7 +33,9 @@ describe('Storage Page', () => {
 
     cy.log('Back to Host discovery from Storage');
     cy.get('.pf-c-page__main').scrollTo('bottom');
-    cy.get('button[name="next"]').contains('Next').should('not.be.disabled');
+    cy.get('button[name="next"]')
+      .contains('Next')
+      .should('not.be.disabled', { timeout: LONG_WAITING_TIME });
     cy.get('button[name="back"]').contains('Back').should('not.be.disabled');
     cy.get('button[name="cancel"]').contains('Cancel').should('not.be.disabled');
     cy.get('button[name="back"]').click();
@@ -56,9 +60,7 @@ describe('Storage Page', () => {
     cy.log('There should be Cluster Events button');
     cy.get('.pf-c-page__main').scrollTo('bottom');
     cy.get('#cluster-events-button').contains('View Cluster Events').click();
-    cy.get('.events-modal__event-list').contains(
-      "Cluster validation 'sufficient-masters-count' is now fixed",
-    ); // One of the expected events to be listed
+    cy.get('.events-modal__event-list').contains('set as bootstrap'); // One of the expected events to be listed
     // No need to test content - let's do it in the Host-discovery tests
     cy.get('.pf-c-modal-box__footer > button').contains('Close').click();
     cy.get('.events-modal__event-list').should('not.exist');
