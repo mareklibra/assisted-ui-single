@@ -52,7 +52,10 @@ describe('Networking Page', () => {
     cy.get('button[data-testid=button-install-cluster]').should('not.be.disabled');
 
     cy.log('Trigerring the installation');
-    cy.get('button[data-testid=button-install-cluster]').click();
-    cy.get('h2').contains('Installation progress');
+    cy.log(
+      'SKIPPED - untill we have full flow covered (blocked on https://issues.redhat.com/browse/AGENT-522',
+    );
+    // cy.get('button[data-testid=button-install-cluster]').click();
+    // cy.get('h2').contains('Installation progress');
   });
 });
