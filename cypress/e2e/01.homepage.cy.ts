@@ -117,7 +117,7 @@ describe('Homepage', () => {
     cy.get('span[id=form-input-enableDiskEncryptionOnWorkers-field-on]');
 
     // Encryption warning
-    cy.get('div[id=alert-tpmv2-bios]').should('not.exist');
+    cy.get('div[data-testid=alert-tpmv2-bios]').should('not.exist');
 
     // Bottom
     if (isSkipCreateCluster()) {
@@ -157,11 +157,11 @@ describe('Homepage', () => {
     });
 
     cy.get('#form-input-enableDiskEncryptionOnMasters-field-off').click();
-    cy.get('div[id=alert-tpmv2-bios]');
+    cy.get('div[data-testid=alert-tpmv2-bios]');
     cy.get('input[id=form-radio-diskEncryptionMode-tang-field]').click();
     cy.get('h6').contains('Tang servers'); // TODO: implement specific test scenration ofr encrypted disks
     cy.get('span[id=form-input-enableDiskEncryptionOnMasters-field-on]').click();
-    cy.get('div[id=alert-tpmv2-bios]').should('not.exist');
+    cy.get('div[data-testid=alert-tpmv2-bios]').should('not.exist');
 
     // TODO: test various field validations
 

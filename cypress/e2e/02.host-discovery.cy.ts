@@ -81,11 +81,11 @@ describe('Host Discovery Page', () => {
     );
 
     cy.log('Information & Troubleshooting alert should be present');
-    cy.get('#alert-information-troubleshooting').contains('Information & Troubleshooting');
+    cy.get('div[data-testid=alert-information-troubleshooting]').contains('Information & Troubleshooting');
     cy.get(
-      '#alert-information-troubleshooting #alert-information-troubleshooting__link-hwrequirements',
+      'div[data-testid=alert-information-troubleshooting] #alert-information-troubleshooting__link-hwrequirements',
     ).contains('Minimum hardware requirements');
-    cy.get('#alert-information-troubleshooting #link-host-troubleshooting').contains(
+    cy.get('div[data-testid=alert-information-troubleshooting] #link-host-troubleshooting').contains(
       'Hosts not showing up?',
     );
     cy.get('#alert-information-troubleshooting__link-hwrequirements').click();
@@ -112,7 +112,7 @@ describe('Host Discovery Page', () => {
     cy.get('tr[data-testid=host-row-0] > td[data-testid=host-name] > button').click();
     cy.get('.pf-c-modal-box__title-text').contains('Change hostname');
     cy.get('#form-input-hostname-field').should('have.value', 'master-0'); // input box
-    cy.get('#change-hostname-form__button-cancel').click();
+    cy.get('button[data-testid=change-hostname-form__button-cancel]').click();
     cy.get('tr[data-testid=host-row-2] > td[data-testid=host-name]').contains('master-1');
     cy.get('tr[data-testid=host-row-2] > td[data-testid=host-hw-status]').contains('Ready');
     cy.get('tr[data-testid=host-row-4] > td[data-testid=host-name]').contains('master-2');

@@ -86,7 +86,7 @@ describe('Storage Page', () => {
     cy.get('tr[data-testid=host-row-0] > td[data-testid=host-name] > button').click();
     cy.get('.pf-c-modal-box__title-text').contains('Change hostname');
     cy.get('#form-input-hostname-field').should('have.value', 'master-0'); // input box
-    cy.get('#change-hostname-form__button-cancel').click();
+    cy.get('button[data-testid=change-hostname-form__button-cancel]').click();
     cy.get('tr[data-testid=host-row-2] > td[data-testid=host-name]').contains('master-1');
     cy.get('tr[data-testid=host-row-2] > td[data-testid=host-hw-status]').contains('Ready');
     cy.get('tr[data-testid=host-row-4] > td[data-testid=host-name]').contains('master-2');
